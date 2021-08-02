@@ -23,7 +23,7 @@ if ret is False:
 break
 
 ```
-Let us pick a Roi immediately (region of interest). In this approach, we are just detecting the pupil, iris, and sclera, leaving out features like eyelashes and the region around the eye.
+Let us pick a Roi immediately (region of interest). In this approach, we are just detecting the pupil, iris, and sclera, leaving out features like eyelashes and the region around the eye.<br /> 
 ```
 roi = frame [269: 795, 537: 1416]
 rows, cols, _ = roi.shape
@@ -31,18 +31,18 @@ gray_roi = cv2.cvtColor(roi, cv2.COLOR_BGR2GRAY)
 gray_roi = cv2.GaussianBlur(gray_roi, (7, 7), 0)
 
 ```
-Now we can focus on determining the best method for motion detection.
-Let us look at all the different directions that the eye may go (in the image below) and see what components are common and unusual among them all.
+Now we can focus on determining the best method for motion detection.<br /> 
+Let us look at all the different directions that the eye may go (in the image below) and see what components are common and unusual among them all.<br /> 
 ![image](https://user-images.githubusercontent.com/72935128/127893447-d9a40b56-8719-4279-83e9-59274114f8c3.png)
 
 ### What can we conclude from this picture?
 Starting on the left, we can observe that the sclera covers the side of the eye opposite the pupil and iris. When the eye is facing straight ahead, the sclera on the left and right sides are evenly distributed.
 
 ## Motion detection
-We might utilize a variety of methods to identify it, such as concentrating on the sclera, iris, or pupil.
-We will take the simplest route possible, which is usually the best option anyhow.
-Let us just concentrate on the pupil. We can see that the pupil is always darker than the rest of the eye by changing the image to grayscale format. Regardless of the person's sclera color or where the eye is gazing.
-To extract only the pupil, first convert to grayscale and then locate the threshold.
+We might utilize a variety of methods to identify it, such as concentrating on the sclera, iris, or pupil.<br /> 
+We will take the simplest route possible, which is usually the best option anyhow.<br /> 
+Let us just concentrate on the pupil. We can see that the pupil is always darker than the rest of the eye by changing the image to grayscale format. Regardless of the person's sclera color or where the eye is gazing.<br /> 
+To extract only the pupil, first convert to grayscale and then locate the threshold.<br /> 
 ```
 gray_roi = cv2.cvtColor(roi, cv2.COLOR_BGR2GRAY)
 gray_roi = cv2.GaussianBlur(gray_roi, (7, 7), 0)
@@ -50,7 +50,7 @@ _, threshold = cv2.threshold(gray_roi, 3, 255, cv2.THRESH_BINARY_INV)
 
 ```
 
-The contours are obtained from the threshold. And then we just eliminate all the noise by choosing the element with the largest area (which is meant to represent the pupil) and skipping the rest.
+The contours are obtained from the threshold. And then we just eliminate all the noise by choosing the element with the largest area (which is meant to represent the pupil) and skipping the rest.<br /> 
 ```
 _, contours, _ = cv2.findContours(threshold, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
 contours = sorted (contours, key=lambda x: cv2.contourArea(x), reverse=True)
@@ -63,7 +63,7 @@ cv2.line(roi, (0, y + int(h/2)), (cols, y + int(h/2)), (0, 255, 0), 2)
 break
 
 ```
-Finally, everything is displayed on the screen.
+Finally, everything is displayed on the screen.<br /> 
 ```
 cv2.imshow("Threshold", threshold)
 cv2.imshow("gray roi", gray_roi)
@@ -74,6 +74,6 @@ break
 cv2.destroyAllWindows()
 
 ```
-![image](https://user-images.githubusercontent.com/72935128/127894609-ee612526-0294-445b-b405-9b8d0a330c95.png)
+![image](https://user-images.githubusercontent.com/72935128/127895459-8276cd6a-fe3b-481d-a11f-6ad03816daae.png)
 
 
