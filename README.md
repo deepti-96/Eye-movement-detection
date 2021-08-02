@@ -9,7 +9,9 @@ An eye may be seen in the image below. The eye is made up of three major compone
 • Pupil - the dark circle in the center. <br /> 
 • Iris – the larger circle, which might be colored differently for various people. <br /> 
 • Sclera - mainly white. <br /> 
+
 ![image](https://user-images.githubusercontent.com/72935128/127892959-4d38878a-bdf8-4670-8def-8841a7ecc68b.png)
+
 We use the eye-moving video as a starting point. Then we will consider how to follow the movement afterwards. <br /> 
 
 We import the libraries OpenCV and NumPy, load the movie “eye recording.flv,” and then loop over the frames of the video, processing image by picture.<br /> 
@@ -33,6 +35,7 @@ gray_roi = cv2.GaussianBlur(gray_roi, (7, 7), 0)
 ```
 Now we can focus on determining the best method for motion detection.<br /> 
 Let us look at all the different directions that the eye may go (in the image below) and see what components are common and unusual among them all.<br /> 
+
 ![image](https://user-images.githubusercontent.com/72935128/127893447-d9a40b56-8719-4279-83e9-59274114f8c3.png)
 
 ### What can we conclude from this picture?
@@ -74,6 +77,7 @@ break
 cv2.destroyAllWindows()
 
 ```
+
 ![image](https://user-images.githubusercontent.com/72935128/127895459-8276cd6a-fe3b-481d-a11f-6ad03816daae.png)
 
 
