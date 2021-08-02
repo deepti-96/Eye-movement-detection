@@ -5,7 +5,7 @@ The technique of monitoring where we look, also known as our point of gaze, is k
 
 ## Analyzing the eye
 Before we dive into the intricacies of image processing, let us look at the eye and consider the many options.
-An eye may be seen in the image below. The eye is made up of three major components:
+An eye may be seen in the image below. The eye is made up of three major components:<br /> 
 • Pupil - the dark circle in the center. <br /> 
 • Iris – the larger circle, which might be colored differently for various people. <br /> 
 • Sclera - mainly white. <br /> 
